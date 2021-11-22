@@ -131,7 +131,8 @@ void WiFiManager::setPassword(String password)
   this->password = password;
 }
 
-void WiFiManager::info(){
+void WiFiManager::info()
+{
   Serial.println("");
   Serial.println("WiFi connected");
   Serial.print("IP address: ");
