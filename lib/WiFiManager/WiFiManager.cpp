@@ -93,7 +93,6 @@ void WiFiManager::handleSaveForm()
     EEPROM.write(i, ssid[i]);
   }
   EEPROM.write(ssid.length(), '\0');
-  //EEPROM.commit();
 
   for (uint8_t i = 63; i < password.length() + 63; i++)
   {

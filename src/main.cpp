@@ -14,7 +14,7 @@ void setup()
 
   WiFiManager wifi;
   wifi.info();
-  api.updateServer();
+  api.init();
   //Serial.printf(" ESP8266 Chip id = %08X\n", ESP.getChipId());
 }
 

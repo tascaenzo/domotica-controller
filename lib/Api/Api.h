@@ -16,15 +16,17 @@ private:
 
   String getToken();
   void setToken(String token);
+  bool authChek();
 
 protected:
   void handleNotFound();
   void handleRoot();
+  void handleAuthorize();
 
 public:
   Api();
 
-  void updateServer();
+  void init();
   void sendMessage(); 
   void handleClient();
 };

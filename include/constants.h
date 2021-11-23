@@ -5,7 +5,7 @@
 #define API_KEY "api_key"
 
 #define SERVER_PORT 3000
-#define SERVER_ORIGIN "192.168.1.70"
+#define ALLOW_ORIGIN "192.168.1.70"
 
 #define DEVICE_ID String(ESP.getChipId()).c_str()
 
