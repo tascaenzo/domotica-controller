@@ -3,11 +3,14 @@
 #include <ESP8266WebServer.h>
 
 #include <WiFiManager.h>
+#include <IO.h>
 #include <Api.h>
+
 #include <constants.h>
 
 //Api api;
 Api* api = Api::getInstance();
+IO* io = IO::getInstance();
 
 void setup()
 {

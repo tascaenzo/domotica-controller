@@ -5,6 +5,9 @@ class IO{
   private:
   //singleton instance
   static IO *instance;
+
+  public:
+  static IO *getInstance();
 };
 
 #endif
