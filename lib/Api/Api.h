@@ -1,4 +1,3 @@
-
 #ifndef API_H
 #define API_H
 
@@ -9,6 +8,9 @@
 class Api
 {
 private:
+  //singleton instance
+  static Api *instance;
+
   String token;
   WiFiClient client;
   HTTPClient http;
@@ -21,13 +23,14 @@ private:
 protected:
   void handleNotFound();
   void handleRoot();
-  void handleAuthorize();
+  //void handleAuthorize();
 
 public:
+  static Api *getInstance();
   Api();
 
   void init();
-  void sendMessage(); 
+  void sendMessage();
   void handleClient();
 };
 

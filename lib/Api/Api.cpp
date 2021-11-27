@@ -5,13 +5,24 @@
 #include <ArduinoJson.h>
 #include <EEPROM.h>
 
+Api *Api::instance = 0;
+
+Api *Api::getInstance()
+{
+  if (instance == 0)
+  {
+    instance = new Api();
+  }
+  return instance;
+}
+
 Api::Api()
 {
   server.begin(SERVER_PORT);
   server.sendHeader(F("Access-Control-Allow-Origin"), F(ALLOW_ORIGIN));
 
   server.on("/", HTTP_POST, std::bind(&Api::handleRoot, this));
-  server.on("/authorize", HTTP_POST, std::bind(&Api::handleAuthorize, this));
+  //server.on("/authorize", HTTP_POST, std::bind(&Api::handleAuthorize, this));
 
   server.onNotFound(std::bind(&Api::handleNotFound, this));
 }
@@ -29,19 +40,24 @@ void Api::setToken(String token)
 void Api::init()
 {
   String token;
-  for (uint8_t i = 127; i < 255; i++)
+  for (uint8_t i = 128; i < 255; i++)
     token += char(EEPROM.read(i));
   setToken(token);
-  Serial.println(token);
 
-  /*StaticJsonDocument<200> doc;
-  doc["ip"] = "my_ip";
+  StaticJsonDocument<200> doc;
+  doc["ip"] = WiFi.localIP();
+  doc["mac"] = WiFi.macAddress();
 
   String json;
   serializeJson(doc, json);
 
-  http.begin(client, API_URL);
+  String url;
+  url.concat(API_URL);
+  url.concat("/update-ip");
+  http.begin(client, url);
+
   http.addHeader("Content-Type", "application/json");
+  //http.addHeader("Authorization", "Bearer " + token);
 
   int httpResponseCode = http.PATCH(json);
 
@@ -57,7 +73,7 @@ void Api::init()
     Serial.print("Error code: ");
     Serial.println(httpResponseCode);
   }
-  http.end();*/
+  http.end();
 }
 
 bool Api::authChek()
@@ -84,7 +100,7 @@ void Api::handleClient()
 
 //////////////////// coontrollers ////////////////////
 
-void Api::handleAuthorize()
+/*void Api::handleAuthorize()
 {
   if (!authChek())
     return;
@@ -97,11 +113,11 @@ void Api::handleAuthorize()
   JsonObject obj = body.as<JsonObject>();
   String token = obj["token"].as<String>();
 
-  for (uint8_t i = 127; i < token.length(); i++)
+  for (uint8_t i = 128; i < token.length() + 128; i++)
   {
-    EEPROM.write(i, token[i]);
+    EEPROM.write(i, token[i - 128]);
   }
-  EEPROM.write(token.length(), '\0');
+  EEPROM.write(token.length() + 128, '\0');
   EEPROM.commit();
 
   Serial.println(token);
@@ -110,7 +126,7 @@ void Api::handleAuthorize()
 
   serializeJson(response, jsonResponse);
   server.send(200, "application/json", jsonResponse);
-}
+}*/
 
 void Api::handleRoot()
 {

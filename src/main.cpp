@@ -5,7 +5,9 @@
 #include <WiFiManager.h>
 #include <Api.h>
 #include <constants.h>
-Api api;
+
+//Api api;
+Api* api = Api::getInstance();
 
 void setup()
 {
@@ -14,13 +16,13 @@ void setup()
 
   WiFiManager wifi;
   wifi.info();
-  api.init();
+  api->init();
   //Serial.printf(" ESP8266 Chip id = %08X\n", ESP.getChipId());
 }
 
 void loop()
 {
-  api.handleClient();
+  api->handleClient();
   if (WiFi.status() != WL_CONNECTED)
   {
     ESP.restart();
