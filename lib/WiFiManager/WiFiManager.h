@@ -17,7 +17,7 @@ private:
 protected:
   void handleNotFound();
   void handleSaveForm();
-  void handleRoot();
+  void handleRootPost();
 
 public:
   WiFiManager();

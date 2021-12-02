@@ -9,4 +9,7 @@
 
 #define DEVICE_ID String(ESP.getChipId()).c_str()
 
+const std::vector<uint8_t> inputPins({});
+const std::vector<uint8_t> outputPins({D1, D2});
+
 #endif

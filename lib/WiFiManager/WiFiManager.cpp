@@ -35,7 +35,7 @@ WiFiManager::WiFiManager()
       restartTimer.attach_ms(120 * 1000, reboot);
 
       server.begin();
-      server.on("/", std::bind(&WiFiManager::handleRoot, this));
+      server.on("/", std::bind(&WiFiManager::handleRootPost, this));
       server.on("/save", std::bind(&WiFiManager::handleSaveForm, this));
       server.onNotFound(std::bind(&WiFiManager::handleNotFound, this));
       Serial.println("HTTP server started");
@@ -55,7 +55,7 @@ void WiFiManager::reboot()
   ESP.restart();
 }
 
-void WiFiManager::handleRoot()
+void WiFiManager::handleRootPost()
 {
   server.send(200, "text/html", HTML);
 }

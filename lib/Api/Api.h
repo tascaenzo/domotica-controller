@@ -4,6 +4,7 @@
 #include <ESP8266HTTPClient.h>
 #include <WiFiClient.h>
 #include <ESP8266WebServer.h>
+#include <IO.h>
 
 class Api
 {
@@ -12,17 +13,19 @@ private:
   static Api *instance;
 
   String token;
+  IO* io = IO::getInstance();
   WiFiClient client;
   HTTPClient http;
   ESP8266WebServer server;
 
   String getToken();
   void setToken(String token);
-  bool authChek();
+  bool authCheck();
+  bool pinCheck(uint8_t pin, String action);
 
 protected:
   void handleNotFound();
-  void handleRoot();
+  void handleRootPost();
   //void handleAuthorize();
 
 public:
