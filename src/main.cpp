@@ -14,8 +14,7 @@ void setup()
 {
   EEPROM.begin(256);
   Serial.begin(9600);
-  pinMode(LED_BUILTIN, OUTPUT);
-
+  
   WiFiManager wifi;
   wifi.info();
   api->init();

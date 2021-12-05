@@ -1,8 +1,6 @@
 #ifndef IO_H
 #define IO_H
 
-//enum GpioStaut {DIGITAL_IN, DIGITAL_OUT, ANALOGIC_IN}
-
 class IO
 {
 private:
@@ -11,9 +9,11 @@ private:
 public:
   static IO *getInstance();
   bool isInit(uint8_t pin);
-  //IO();
+  IO();
 
-  bool gpioStatus(uint8_t pin);
+  bool gpioGetStatus(uint8_t pin);
+  bool gpioSetStatus(uint8_t pin, bool status);
+
 };
 
 #endif

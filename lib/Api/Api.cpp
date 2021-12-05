@@ -164,14 +164,14 @@ void Api::handleRootPost()
     return;
 
   if (action == "GPIO_ON")
-    digitalWrite(pin, HIGH);
+    response["level"] = io->gpioSetStatus(pin, HIGH);
 
   if (action == "GPIO_OFF")
-    digitalWrite(pin, LOW);
+    response["level"] = io->gpioSetStatus(pin, LOW);
 
   if (action == "GPIO_STATUS")
   {
-    response["level"] = io->gpioStatus(pin);
+    response["level"] = io->gpioGetStatus(pin);
   }
 
   response["statusCode"] = 200;

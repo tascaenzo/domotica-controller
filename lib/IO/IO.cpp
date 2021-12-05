@@ -13,6 +13,19 @@ IO *IO::getInstance()
   return instance;
 }
 
+IO::IO()
+{
+  for (auto pin : inputPins)
+  {
+    pinMode(pin, INPUT_PULLUP);
+  }
+
+  for (auto pin : outputPins)
+  {
+    pinMode(pin, OUTPUT);
+  }
+}
+
 bool IO::isInit(uint8_t pin)
 {
   bool checkOut = std::find(outputPins.begin(), outputPins.end(), pin) != outputPins.end();
@@ -20,9 +33,13 @@ bool IO::isInit(uint8_t pin)
   return checkOut || checkIn;
 }
 
-bool IO::gpioStatus(uint8_t pin)
+bool IO::gpioGetStatus(uint8_t pin)
 {
-  int key = std::find(outputPins.begin(), outputPins.end(), pin) != outputPins.end();
-  Serial.println(key);
-  return true;
+  return digitalRead(pin);
+}
+
+bool IO::gpioSetStatus(uint8_t pin, bool status)
+{
+  digitalWrite(pin, status);
+  return this->gpioGetStatus(pin);
 }
