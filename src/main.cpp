@@ -3,14 +3,11 @@
 #include <ESP8266WebServer.h>
 
 #include <WiFiManager.h>
+#include <Mqtt.h>
 #include <IO.h>
-#include <Api.h>
 
-#include <constants.h>
-
-//Api api;
-Api* api = Api::getInstance();
-IO* io = IO::getInstance();
+IO *io = IO::getInstance();
+Mqtt* mqtt = Mqtt::getInstance();
 
 void setup()
 {
@@ -19,15 +16,18 @@ void setup()
 
   WiFiManager wifi;
   wifi.info();
-  api->init();
-  //Serial.printf(" ESP8266 Chip id = %08X\n", ESP.getChipId());
+
+  Serial.print("Mqtt init");
+  mqtt->init();
+
+  Serial.printf("\nESP8266 Chip id = %08X\n", ESP.getChipId());
 }
 
 void loop()
 {
-  api->handleClient();
   if (WiFi.status() != WL_CONNECTED)
   {
     ESP.restart();
   }
+  mqtt->loop();
 }
