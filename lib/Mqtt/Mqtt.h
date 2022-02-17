@@ -4,7 +4,6 @@
 #include <ESP8266WiFi.h>
 #include <PubSubClient.h>
 
-
 class Mqtt
 {
 private:
@@ -20,6 +19,8 @@ public:
 
   void init();
   void loop();
+
+  void sendMessage(String payload);
   
   static void callback(char* topic, byte* payload, unsigned int length);
 };

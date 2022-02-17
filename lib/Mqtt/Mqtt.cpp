@@ -1,5 +1,6 @@
 #include "Mqtt.h"
 #include "constants.h"
+#include <ArduinoJson.h>
 
 Mqtt *Mqtt::instance = 0;
 
@@ -14,9 +15,28 @@ Mqtt *Mqtt::getInstance()
 
 void Mqtt::callback(char *topic, byte *payload, unsigned int length)
 {
-  Serial.print("Message arrived [");
-  Serial.print(topic);
-  Serial.print("] ");
+  
+  StaticJsonDocument<200> json;
+  deserializeJson(json, payload);
+
+  String action = json["action"].as<const char*>();
+
+  if(action == "INFO"){
+    Serial.printf("Info Controller");
+  }
+
+}
+
+void Mqtt::sendMessage(String payload)
+{
+  String json;
+  StaticJsonDocument<200> doc;
+
+  doc["payload"] = payload;
+  doc["devices"] = WiFi.macAddress();
+  serializeJson(doc, json);
+
+  this->mqttClient.publish(MQTT_DEVICE_TOPIC, json.c_str());
 }
 
 Mqtt::Mqtt()
@@ -33,10 +53,10 @@ void Mqtt::init()
     String client_id = String(WiFi.macAddress());
     mqttClient.connect(client_id.c_str());
 
-    delay(500);
+    delay(250);
     Serial.print(".");
   }
-  mqttClient.subscribe(MQTT_DEVICE_TOPIC);
+  mqttClient.subscribe(WiFi.macAddress().c_str());
 }
 
 void Mqtt::loop(){

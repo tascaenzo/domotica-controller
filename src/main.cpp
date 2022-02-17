@@ -3,10 +3,8 @@
 #include <ESP8266WebServer.h>
 
 #include <WiFiManager.h>
-#include <IO.h>
 #include <Mqtt.h>
-
-#include <constants.h>
+#include <IO.h>
 
 IO *io = IO::getInstance();
 Mqtt* mqtt = Mqtt::getInstance();
@@ -22,7 +20,7 @@ void setup()
   Serial.print("Mqtt init");
   mqtt->init();
 
-  //Serial.printf("ESP8266 Chip id = %08X\n", ESP.getChipId());
+  Serial.printf("\nESP8266 Chip id = %08X\n", ESP.getChipId());
 }
 
 void loop()

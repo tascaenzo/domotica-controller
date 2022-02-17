@@ -21,6 +21,8 @@ WiFiManager::WiFiManager()
 
   WiFi.mode(WIFI_STA);
   WiFi.begin(this->getSsid(), this->getPassword());
+  Serial.print("WiFi");
+
   for (uint8_t i = 0; WiFi.status() != WL_CONNECTED; i++)
   {
     if (i > 25)
