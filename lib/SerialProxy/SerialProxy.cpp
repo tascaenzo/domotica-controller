@@ -24,6 +24,8 @@ void SerialProxy::init()
 void SerialProxy::loop()
 {
   Mqtt *mqtt = Mqtt::getInstance();
-  delay(250);
-  mqtt->sendMessage("SerialProxy");
+  if (Serial.available())
+  {
+    mqtt->sendMessage(Serial.readString());
+  }
 }
