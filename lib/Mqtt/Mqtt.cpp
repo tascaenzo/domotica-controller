@@ -15,16 +15,16 @@ Mqtt *Mqtt::getInstance()
 
 void Mqtt::callback(char *topic, byte *payload, unsigned int length)
 {
-  
+
   StaticJsonDocument<200> json;
   deserializeJson(json, payload);
 
-  String action = json["action"].as<const char*>();
+  String action = json["action"].as<const char *>();
 
-  if(action == "INFO"){
+  if (action == "INFO")
+  {
     Serial.printf("Info Controller");
   }
-
 }
 
 void Mqtt::sendMessage(String payload)
@@ -59,6 +59,7 @@ void Mqtt::init()
   mqttClient.subscribe(WiFi.macAddress().c_str());
 }
 
-void Mqtt::loop(){
+void Mqtt::loop()
+{
   this->mqttClient.loop();
 }

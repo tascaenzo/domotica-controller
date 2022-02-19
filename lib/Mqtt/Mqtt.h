@@ -7,7 +7,7 @@
 class Mqtt
 {
 private:
-  //singleton instance
+  // singleton instance
   static Mqtt *instance;
 
   WiFiClient espClient;
@@ -21,8 +21,8 @@ public:
   void loop();
 
   void sendMessage(String payload);
-  
-  static void callback(char* topic, byte* payload, unsigned int length);
+
+  static void callback(char *topic, byte *payload, unsigned int length);
 };
 
 #endif
