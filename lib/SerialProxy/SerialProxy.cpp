@@ -12,15 +12,18 @@ SerialProxy *SerialProxy::getInstance()
   return instance;
 }
 
-  SerialProxy::SerialProxy(){
-  }
+SerialProxy::SerialProxy()
+{
+}
 
-  void SerialProxy::init(){
-    Serial.println("SerialProxy init");
-  }
+void SerialProxy::init()
+{
+  Serial.println("SerialProxy init");
+}
 
-  void SerialProxy::loop(){
-    Mqtt* mqtt = Mqtt::getInstance();
-    delay(250);
-    mqtt->sendMessage("SerialProxy");
-  }
+void SerialProxy::loop()
+{
+  Mqtt *mqtt = Mqtt::getInstance();
+  delay(250);
+  mqtt->sendMessage("SerialProxy");
+}

@@ -8,9 +8,9 @@
 #include <IO.h>
 
 IO *io = IO::getInstance();
-Mqtt* mqtt = Mqtt::getInstance();
+Mqtt *mqtt = Mqtt::getInstance();
 
-SerialProxy* serialProxy = SerialProxy::getInstance();
+SerialProxy *serialProxy = SerialProxy::getInstance();
 
 void setup()
 {

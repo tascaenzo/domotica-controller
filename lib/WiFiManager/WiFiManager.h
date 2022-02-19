@@ -11,7 +11,7 @@ private:
   String ssid;
   String password;
   ESP8266WebServer server;
-  
+
   static void reboot();
 
 protected:

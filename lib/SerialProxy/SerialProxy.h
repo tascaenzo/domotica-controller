@@ -3,11 +3,12 @@
 
 #include <Mqtt.h>
 
-class SerialProxy{
-  private:
+class SerialProxy
+{
+private:
   static SerialProxy *instance;
 
-  public:
+public:
   static SerialProxy *getInstance();
   SerialProxy();
 

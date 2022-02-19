@@ -32,7 +32,7 @@ WiFiManager::WiFiManager()
       Serial.print("AP IP address: ");
       Serial.println(myIP);
 
-      //init http server;
+      // init http server;
       Ticker restartTimer;
       restartTimer.attach_ms(120 * 1000, reboot);
 
