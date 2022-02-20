@@ -1,5 +1,5 @@
-#ifndef ENERGY_MONITOR_H
-#define ENERGY_MONITOR_H
+#ifndef SERIAL_PROXY_H
+#define SERIAL_PROXY_H
 
 #include <Mqtt.h>
 
